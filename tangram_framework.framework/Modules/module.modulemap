@@ -1,0 +1,6 @@
+framework module tangram_framework {
+  umbrella header "tangram_framework.h"
+
+  export *
+  module * { export * }
+}
