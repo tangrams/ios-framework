@@ -1,22 +1,27 @@
-{
-  "name": "Tangram-es",
-  "version": "0.1.0",
-  "summary": "Open source C++ library for rendering 2D and 3D maps from vector data using OpenGL ES.",
-  "description": "Open source C++ library for rendering 2D and 3D maps from vector data using OpenGL ES, wrapped with native Cocoa Touch APIs.",
-  "homepage": "https://mapzen.com/products/tangram/",
-  "license": {
-    "type": "MIT",
-    "file": "LICENSE.md"
-  },
-  "documentation_url": "https://mapzen.com/documentation/tangram/",
-  "source": {
-    "http": "https://raw.githubusercontent.com/tangrams/ios-framework/master/sdk.zip",
-    "flatten": true
-  },
-  "platforms": {
-    "ios": "9.0"
-  },
-  "requires_arc": true,
-  "vendored_frameworks": "tangram_framework.framework",
-  "module_name": "tangram"
-}
+Pod::Spec.new do |s|
+
+  s.name    = 'Tangram-es'
+  s.version = '0.1.0'
+
+  s.summary           = 'Open source C++ library for rendering 2D and 3D maps from vector data using OpenGL ES.'
+  s.description       = 'Open source C++ library for rendering 2D and 3D maps from vector data using OpenGL ES, wrapped with native Cocoa Touch APIs.'
+  s.homepage          = 'https://mapzen.com/products/tangram/'
+  s.license           = { :type => 'MIT', :file => 'LICENSE.md' }
+  s.author            = { 'Mapzen' => 'ios-support@mapzen.com' }
+  s.social_media_url  = 'https://twitter.com/mapzen'
+  s.documentation_url = 'https://mapzen.com/documentation/tangram/'
+
+  s.source = {
+    :http => "https://raw.githubusercontent.com/tangrams/ios-framework/master/sdk.zip",
+    :flatten => true
+  }
+
+  s.platform              = :ios
+  s.ios.deployment_target = '9.0'
+
+  s.requires_arc = true
+
+  s.vendored_frameworks = 'sdk/tangram_framework.framework'
+  s.module_name = 'tangram_framework'
+
+end
