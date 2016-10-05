@@ -12,8 +12,7 @@ Pod::Spec.new do |s|
   s.documentation_url = 'https://mapzen.com/documentation/tangram/'
 
   s.source = {
-    :http => "https://raw.githubusercontent.com/tangrams/ios-framework/master/sdk.zip",
-    :flatten => true
+    :path => "."
   }
 
   s.platform              = :ios
@@ -21,7 +20,7 @@ Pod::Spec.new do |s|
 
   s.requires_arc = true
 
-  s.vendored_frameworks = 'sdk/tangram_framework.framework'
+  s.vendored_frameworks = 'tangram_framework.framework'
   s.module_name = 'tangram_framework'
 
 end
