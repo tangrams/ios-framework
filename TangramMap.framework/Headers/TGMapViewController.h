@@ -47,7 +47,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol TGMapViewDelegate <NSObject>
 @optional
 - (void)mapView:(TGMapViewController*)mapView didLoadSceneAsync:(NSString*)scene;
-- (void)mapView:(TGMapViewController*)mapView didSelectFeatures:(NSDictionary*)features atScreenPosition:(CGPoint)position;
+- (void)mapView:(TGMapViewController*)mapView didSelectFeature:(NSDictionary*)feature atScreenPosition:(CGPoint)position;
 @end
 
 NS_ASSUME_NONNULL_END
@@ -84,6 +84,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)markerSetPolygon:(TGMapMarkerId)identifier polygon:(TGGeoPolygon *)polygon;
 
 - (BOOL)markerSetVisible:(TGMapMarkerId)identifier visible:(BOOL)visible;
+
+- (BOOL)markerSetImage:(TGMapMarkerId)identifier image:(UIImage *)image;
 
 - (BOOL)markerRemove:(TGMapMarkerId)marker;
 
