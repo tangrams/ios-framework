@@ -15,7 +15,9 @@
 #import "TGGeoPoint.h"
 #import "TGGeoPolygon.h"
 #import "TGGeoPolyline.h"
+#import "TGSceneUpdate.h"
 #import "TGHttpHandler.h"
+#import "TGLabelPickResult.h"
 
 typedef NS_ENUM(NSInteger, TGCameraType) {
     TGCameraTypePerspective = 0,
@@ -57,12 +59,17 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)mapView:(TGMapViewController *)view recognizer:(UIGestureRecognizer *)recognizer didRecognizeShoveGesture:(CGPoint)location;
 @end
 
+NS_ASSUME_NONNULL_END
+
 @protocol TGMapViewDelegate <NSObject>
 @optional
-- (void)mapView:(TGMapViewController*)mapView didLoadSceneAsync:(NSString*)scene;
-- (void)mapView:(TGMapViewController*)mapView didSelectFeature:(NSDictionary*)feature atScreenPosition:(CGPoint)position;
-- (void)mapViewDidCompleteLoading:(TGMapViewController *)mapView;
+- (void)mapView:(nonnull TGMapViewController *)mapView didLoadSceneAsync:(nonnull NSString *)scene;
+- (void)mapView:(nonnull TGMapViewController *)mapView didSelectFeature:(nullable NSDictionary *)feature atScreenPosition:(CGPoint)position;
+- (void)mapView:(nonnull TGMapViewController *)mapView didSelectLabel:(nullable TGLabelPickResult *)labelPickResult atScreenPosition:(CGPoint)position;
+- (void)mapViewDidCompleteLoading:(nonnull TGMapViewController *)mapView;
 @end
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface TGMapViewController : GLKViewController <UIGestureRecognizerDelegate>
 
@@ -108,17 +115,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark Scene loading - updates interface
 
-- (void)loadSceneFile:(NSString*)path;
+- (void)loadSceneFile:(NSString *)path;
 
-- (void)loadSceneFileAsync:(NSString*)path;
+- (void)loadSceneFile:(NSString *)path sceneUpdates:(NSArray<TGSceneUpdate *> *)sceneUpdates;
+
+- (void)loadSceneFileAsync:(NSString *)path;
+
+- (void)loadSceneFileAsync:(NSString *)path sceneUpdates:(NSArray<TGSceneUpdate *> *)sceneUpdates;
 
 - (void)queueSceneUpdate:(NSString*)componentPath withValue:(NSString*)value;
+
+- (void)queueSceneUpdates:(NSArray<TGSceneUpdate *> *)sceneUpdates;
 
 - (void)applySceneUpdates;
 
 #pragma mark Feature picking interface
 
 - (void)pickFeatureAt:(CGPoint)screenPosition;
+
+- (void)pickLabelAt:(CGPoint)screenPosition;
 
 #pragma mark Map View lifecycle
 
