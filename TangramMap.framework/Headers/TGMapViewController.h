@@ -15,7 +15,9 @@
 #import "TGGeoPoint.h"
 #import "TGGeoPolygon.h"
 #import "TGGeoPolyline.h"
+#import "TGSceneUpdate.h"
 #import "TGHttpHandler.h"
+#import "TGLabelPickResult.h"
 
 typedef NS_ENUM(NSInteger, TGCameraType) {
     TGCameraTypePerspective = 0,
@@ -48,21 +50,39 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol TGRecognizerDelegate <NSObject>
 @optional
+- (BOOL)mapView:(TGMapViewController *)view recognizer:(UIGestureRecognizer *)recognizer shouldRecognizeSingleTapGesture:(CGPoint)location;
 - (void)mapView:(TGMapViewController *)view recognizer:(UIGestureRecognizer *)recognizer didRecognizeSingleTapGesture:(CGPoint)location;
+
+- (BOOL)mapView:(TGMapViewController *)view recognizer:(UIGestureRecognizer *)recognizer shouldRecognizeDoubleTapGesture:(CGPoint)location;
 - (void)mapView:(TGMapViewController *)view recognizer:(UIGestureRecognizer *)recognizer didRecognizeDoubleTapGesture:(CGPoint)location;
+
+- (BOOL)mapView:(TGMapViewController *)view recognizer:(UIGestureRecognizer *)recognizer shouldRecognizeLongPressGesture:(CGPoint)location;
 - (void)mapView:(TGMapViewController *)view recognizer:(UIGestureRecognizer *)recognizer didRecognizeLongPressGesture:(CGPoint)location;
-- (void)mapView:(TGMapViewController *)view recognizer:(UIGestureRecognizer *)recognizer didRecognizePanGesture:(CGPoint)location;
+
+- (BOOL)mapView:(TGMapViewController *)view recognizer:(UIGestureRecognizer *)recognizer shouldRecognizePanGesture:(CGPoint)displacement;
+- (void)mapView:(TGMapViewController *)view recognizer:(UIGestureRecognizer *)recognizer didRecognizePanGesture:(CGPoint)displacement;
+
+- (BOOL)mapView:(TGMapViewController *)view recognizer:(UIGestureRecognizer *)recognizer shouldRecognizePinchGesture:(CGPoint)location;
 - (void)mapView:(TGMapViewController *)view recognizer:(UIGestureRecognizer *)recognizer didRecognizePinchGesture:(CGPoint)location;
+
+- (BOOL)mapView:(TGMapViewController *)view recognizer:(UIGestureRecognizer *)recognizer shouldRecognizeRotationGesture:(CGPoint)location;
 - (void)mapView:(TGMapViewController *)view recognizer:(UIGestureRecognizer *)recognizer didRecognizeRotationGesture:(CGPoint)location;
-- (void)mapView:(TGMapViewController *)view recognizer:(UIGestureRecognizer *)recognizer didRecognizeShoveGesture:(CGPoint)location;
+
+- (BOOL)mapView:(TGMapViewController *)view recognizer:(UIGestureRecognizer *)recognizer shouldRecognizeShoveGesture:(CGPoint)displacement;
+- (void)mapView:(TGMapViewController *)view recognizer:(UIGestureRecognizer *)recognizer didRecognizeShoveGesture:(CGPoint)displacement;
 @end
+
+NS_ASSUME_NONNULL_END
 
 @protocol TGMapViewDelegate <NSObject>
 @optional
-- (void)mapView:(TGMapViewController*)mapView didLoadSceneAsync:(NSString*)scene;
-- (void)mapView:(TGMapViewController*)mapView didSelectFeature:(NSDictionary*)feature atScreenPosition:(CGPoint)position;
-- (void)mapViewDidCompleteLoading:(TGMapViewController *)mapView;
+- (void)mapView:(nonnull TGMapViewController *)mapView didLoadSceneAsync:(nonnull NSString *)scene;
+- (void)mapView:(nonnull TGMapViewController *)mapView didSelectFeature:(nullable NSDictionary *)feature atScreenPosition:(CGPoint)position;
+- (void)mapView:(nonnull TGMapViewController *)mapView didSelectLabel:(nullable TGLabelPickResult *)labelPickResult atScreenPosition:(CGPoint)position;
+- (void)mapViewDidCompleteLoading:(nonnull TGMapViewController *)mapView;
 @end
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface TGMapViewController : GLKViewController <UIGestureRecognizerDelegate>
 
@@ -108,17 +128,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark Scene loading - updates interface
 
-- (void)loadSceneFile:(NSString*)path;
+- (void)loadSceneFile:(NSString *)path;
 
-- (void)loadSceneFileAsync:(NSString*)path;
+- (void)loadSceneFile:(NSString *)path sceneUpdates:(NSArray<TGSceneUpdate *> *)sceneUpdates;
+
+- (void)loadSceneFileAsync:(NSString *)path;
+
+- (void)loadSceneFileAsync:(NSString *)path sceneUpdates:(NSArray<TGSceneUpdate *> *)sceneUpdates;
 
 - (void)queueSceneUpdate:(NSString*)componentPath withValue:(NSString*)value;
+
+- (void)queueSceneUpdates:(NSArray<TGSceneUpdate *> *)sceneUpdates;
 
 - (void)applySceneUpdates;
 
 #pragma mark Feature picking interface
 
 - (void)pickFeatureAt:(CGPoint)screenPosition;
+
+- (void)pickLabelAt:(CGPoint)screenPosition;
 
 #pragma mark Map View lifecycle
 
