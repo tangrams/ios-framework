@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name    = 'Tangram-es'
-  s.version = '0.1.0'
+  s.version = '0.4.0'
 
   s.summary           = 'Open source C++ library for rendering 2D and 3D maps from vector data using OpenGL ES.'
   s.description       = 'Open source C++ library for rendering 2D and 3D maps from vector data using OpenGL ES, wrapped with native Cocoa Touch APIs.'
@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   }
 
   s.platform              = :ios
-  s.ios.deployment_target = '9.0'
+  s.ios.deployment_target = '9.3'
 
   s.requires_arc = true
 
