@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.documentation_url = 'https://mapzen.com/documentation/tangram/'
 
   s.source = {
-    :path => "."
+    :git => 'https://github.com/tangrams/ios-framework.git', :tag => "v#{s.version}"
   }
 
   s.platform              = :ios
