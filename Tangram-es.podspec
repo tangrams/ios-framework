@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.license           = { :type => 'MIT', :file => 'LICENSE.md' }
   s.author            = { 'Mapzen' => 'ios-support@mapzen.com' }
   s.social_media_url  = 'https://twitter.com/mapzen'
-  s.documentation_url = 'https://mapzen.com/documentation/tangram/ios-framework/0.5.1/'
+  s.documentation_url = 'https://mapzen.com/documentation/tangram/ios-framework/0.6.0/'
 
   s.source = {
     :git => 'https://github.com/tangrams/ios-framework.git', :tag => "v#{s.version}"
