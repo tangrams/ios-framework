@@ -7,21 +7,17 @@
 //
 
 import UIKit
-import TangramMap
 
-class ViewController: TGMapViewController {
+class ViewController: UITabBarController {
 
-    override func viewWillAppear(_ animated: Bool) {
-        let sceneURL = "https://tangrams.github.io/walkabout-style/walkabout-style.yaml"
-        super.loadSceneFileAsync(sceneURL, sceneUpdates: [ TGSceneUpdate(path: "global.sdk_mapzen_api_key", value: "vector-tiles-tyHL4AY") ])
-    }
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    let vc1 = MapViewController.init()
+    let vc2 = MapViewController.init()
+    self.viewControllers = [vc1, vc2]
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
+    self.tabBar.items?[0].title = "Map 1"
+    self.tabBar.items?[1].title = "Map 2"
+  }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
 }
-
