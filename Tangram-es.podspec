@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name    = 'Tangram-es'
-  s.version = '0.6.1'
+  s.version = '0.5.2'
 
   s.summary           = 'Open source C++ library for rendering 2D and 3D maps from vector data using OpenGL ES.'
   s.description       = 'Open source C++ library for rendering 2D and 3D maps from vector data using OpenGL ES, wrapped with native Cocoa Touch APIs.'
@@ -9,7 +9,7 @@ Pod::Spec.new do |s|
   s.license           = { :type => 'MIT', :file => 'LICENSE.md' }
   s.author            = { 'Mapzen' => 'ios-support@mapzen.com' }
   s.social_media_url  = 'https://twitter.com/mapzen'
-  s.documentation_url = 'https://mapzen.com/documentation/tangram/ios-framework/0.6.1/'
+  s.documentation_url = 'https://mapzen.com/documentation/tangram/ios-framework/0.5.1/'
 
   s.source = {
     :git => 'https://github.com/tangrams/ios-framework.git', :tag => "v#{s.version}"
